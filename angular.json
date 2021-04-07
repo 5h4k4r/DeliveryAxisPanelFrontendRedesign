@@ -25,6 +25,7 @@
               "src/favicon.png"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/typeface-exo/index.css",
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
@@ -35,6 +36,7 @@
               "src/app/@theme/styles/styles.scss"
             ],
             "scripts": [
+              "node_modules/@fortawesome/fontawesome-free/js/all.js",
               "node_modules/pace-js/pace.min.js"
             ]
           },
@@ -89,9 +91,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
+              "node_modules/@fortawesome/fontawesome-free/js/all.js",
               "node_modules/pace-js/pace.min.js"
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/typeface-exo/index.css",
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
