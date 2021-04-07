@@ -3,7 +3,7 @@
     <span class="header">Today's Orders</span>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="data">
   <div class="col-7">
     <div class="row">
       <div class="col-12">
@@ -16,7 +16,7 @@
                   Awaiting Review
                 </div>
                 <div class="card-description">
-                  <span class="card-number">14 </span> <span class="card-description-content"> orders</span>
+                  <span class="card-number">{{data.orderCounts.todayAwaitingReview}} </span> <span class="card-description-content"> orders</span>
                 </div>
               </div>
             </div>
@@ -29,8 +29,8 @@
                   Awaiting Collection
                 </div>
                 <div class="card-description">
-                  <span class="card-number">55 </span> <span class="card-description-content"> orders</span>
-                </div>
+                  <span class="card-number">{{data.orderCounts.todayAwaitingCollection}} </span> <span class="card-description-content"> orders</span>
+                </div>  
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@
                   Being Delivered
                 </div>
                 <div class="card-description">
-                  <span class="card-number">87 </span> <span class="card-description-content"> orders</span>
+                  <span class="card-number">{{data.orderCounts.todayBeingDelivered}} </span> <span class="card-description-content"> orders</span>
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
                   Admins
                 </div>
                 <div class="card-description">
-                  <span class="card-description-content">total</span><span class="card-number">24</span> 
+                  <span class="card-description-content">total</span><span class="card-number">{{data.adminCount}}</span> 
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@
                   Orders
                 </div>
                 <div class="card-description">
-                  <span class="card-description-content">total</span><span class="card-number">345</span> 
+                  <span class="card-description-content">total</span><span class="card-number">{{data.orderCounts.total}}</span> 
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@
                   Drivers
                 </div>
                 <div class="card-description">
-                  <span class="card-description-content">total</span><span class="card-number">21</span> 
+                  <span class="card-description-content">total</span><span class="card-number">{{data.driverCount}}</span> 
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@
                   Orders
                 </div>
                 <div class="card-description">
-                  <span class="card-description-content">active</span><span class="card-number">32</span> 
+                  <span class="card-description-content">active</span><span class="card-number">{{data.orderCounts.totalActive}}</span> 
                 </div>
               </div>
             </div>
