@@ -1,0 +1,77 @@
+@import "../../@theme/styles/themes.scss";
+
+@include nb-install-component() {
+  .header {
+    font-size: 28px;
+  }
+  .row.header-part {
+    margin-bottom: 10px;
+  }
+  .card {
+    height: 230px;
+    width: 100%;
+    margin-bottom: 30px;
+    // background-color: nb-theme(background-basic-color-1);
+    position: relative;
+    background: nb-theme(background-basic-color-1);
+    .image {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+    .card-container {
+      padding-top: 15px;
+      padding-left: 15px;
+    }
+    .card-title {
+      font-size: 16px;
+    }
+    .card-description {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding-bottom:15px;
+      padding-left:15px;
+      width: 100%;
+    }
+    .card-description-content {
+      color: nb-theme(text-hint-color);
+      font-size: 16px;
+    }
+    .card-number {
+      font-size: 24px;
+    }
+  }
+  .card.delivered{
+    height:500px;
+    .card-title {
+      padding-top:30px;
+      padding-left:30px;
+      font-size: 32px;
+    }
+    .card-description {
+      padding-bottom:30px;
+      padding-left:30px;
+    }
+    .card-description-content {
+      color: nb-theme(text-hint-color);
+      font-size: 32px;
+    }
+    .card-number {
+      font-size: 48px;
+    }
+  }
+  .card.details{
+    height:100px;
+   position: relative;
+    .card-description {
+      display: flex;
+      justify-content: flex-end;
+      padding-right:20px;
+    }
+    .card-number {
+      font-size: 24px;
+      margin-left:5px;
+    }
+  }
+}
