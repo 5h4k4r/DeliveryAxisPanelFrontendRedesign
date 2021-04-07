@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import { NbMediaBreakpointsService, NbMenuService, NbSearchService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
 import { map, takeUntil } from 'rxjs/operators';
@@ -37,55 +37,58 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  searchType = 'modal-half'
+    constructor(private sidebarService: NbSidebarService,
+      private menuService: NbMenuService,
+      private themeService: NbThemeService,
+      private userService: UserData,
+      private breakpointService: NbMediaBreakpointsService,
+      private searchSearvice: NbSearchService) {
+}
+activateSearch() {
+  this.searchSearvice.activateSearch(this.searchType);
+}
+ngOnInit() {
+  this.currentTheme = this.themeService.currentTheme;
 
-  constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private userService: UserData,
-              private breakpointService: NbMediaBreakpointsService) {
-  }
+  this.userService.getUsers()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((users: any) => this.user = users.nick);
 
-  ngOnInit() {
-    this.currentTheme = this.themeService.currentTheme;
+  const { xl } = this.breakpointService.getBreakpointsMap();
+  this.themeService.onMediaQueryChange()
+    .pipe(
+      map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
+      takeUntil(this.destroy$),
+    )
+    .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
 
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+  this.themeService.onThemeChange()
+    .pipe(
+      map(({ name }) => name),
+      takeUntil(this.destroy$),
+    )
+    .subscribe(themeName => this.currentTheme = themeName);
+}
 
-    const { xl } = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
-      .pipe(
-        map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-        takeUntil(this.destroy$),
-      )
-      .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
+ngOnDestroy() {
+  this.destroy$.next();
+  this.destroy$.complete();
+}
 
-    this.themeService.onThemeChange()
-      .pipe(
-        map(({ name }) => name),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(themeName => this.currentTheme = themeName);
-  }
+changeTheme(themeName: string) {
+  this.themeService.changeTheme(themeName);
+}
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+toggleSidebar(): boolean {
+  this.sidebarService.toggle(true, 'menu-sidebar');
 
-  changeTheme(themeName: string) {
-    this.themeService.changeTheme(themeName);
-  }
+  return false;
+}
 
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-
-    return false;
-  }
-
-  navigateHome() {
-    this.menuService.navigateHome();
-    return false;
-  }
+navigateHome() {
+  this.menuService.navigateHome();
+  return false;
+}
 }
