@@ -20,10 +20,12 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { ApiModule } from './backend/api.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ApiModule.forRoot({ rootUrl: '/api' }),
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
